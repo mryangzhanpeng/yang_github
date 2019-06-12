@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yangzhanpeng.mapper.MovieMapper">
+	<!--影片列表  -->
+	<select id="movielist" resultType="map">
+		SELECT a.mid,a.mname,a.mauthor,a.mprice,a.mdate,a.mtime,b.tname,a.myear,a.maddr,a.stats FROM tb_movie a LEFT JOIN tb_type b on a.tid=b.tid
+		<where>
+			<if test="mname!=''">
+				and mname like '%${mname}%'
+			</if>
+			<if test="mauthor!=''">
+				and mauthor like '%${mauthor}%'
+			</if>
+			<if test="myear!=''">
+				and myear like '%${myear}%'
+			</if>
+			<if test="start!='' and end!=''">
+				and a.mdate between ${start} and ${end}
+			</if>
+			<if test="min!='' and max!=''">
+				and a.mprice between ${min} and ${max}
+			</if>
+			<if test="min1!='' and max1!=''">
+				and a.mtime between ${min1} and ${max1}
+			</if>
+		</where>
+		order by 
+		<if test="flag==1">
+			a.mdate ${date}
+		</if>
+		<if test="flag==2">
+			a.mtime ${mtime}
+		</if>
+		<if test="flag==3">
+			a.myear ${myear1}
+		</if>
+	</select>
+	<!--删除  -->
+	<delete id="delete">
+		delete from tb_movie where mid in(${value})
+	</delete>
+	<update id="update">
+		update tb_movie set stats=1 where mid=${value}
+	</update>
+	<update id="update1">
+		update tb_movie set stats=0 where mid=${value}
+	</update>
+</mapper>
