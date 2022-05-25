@@ -11,7 +11,7 @@
 		<!-- 处理中文编码格式 -->
 		<argLine>-Dfile.encoding=UTF-8</argLine>
 
-		<spring.version>4.3.13.RELEASE</spring.version>
+		<spring.version>5.2.22.RELEASE</spring.version>
 		<mybatis.version>3.4.2</mybatis.version>
 		<log4j.version>1.2.17</log4j.version>
 		<druid.version>1.0.9</druid.version>
